@@ -6,6 +6,10 @@ const userRouter = require('./routes/users');
 const authRouter = require('./routes/auth');
 const productRouter = require('./routes/product');
 const cartRouter = require('./routes/cart');
+const orderRouter = require('./routes/order');
+const stripeRouter = require('./routes/stripe');
+const cors = require("cors");
+
 
 
 
@@ -25,11 +29,17 @@ mongoose
     .then(() => console.log('Mongo DB connect.'))
     .catch(err => console.log(err));
 
+app.use(cors());
+
 //Use Routes
 app.use("/api/users", userRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/products", productRouter);
-app.use("/api/cart", cartRouter);
+app.use("/api/carts", cartRouter);
+app.use("/api/orders", orderRouter);
+app.use("/api/checkout", stripeRouter);
+
+
 
 
 
